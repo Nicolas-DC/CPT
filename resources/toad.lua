@@ -123,10 +123,10 @@ function M.new( instance, options )
 				-- Landed after jumping
 				self.jumping = false
 				if not ( left == 0 and right == 0 ) and not instance.jumping then
-					-- instance:setSequence( "walk" )
-					-- instance:play()
+					instance:setSequence( "walk" )
+					instance:play()
 				else
-					-- self:setSequence( "idle" )
+					self:setSequence( "idle" )
 				end
 			end
 		end

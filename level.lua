@@ -5,7 +5,7 @@ local scene = composer.newScene()
 local physics = require( "physics" )
 physics.start()
 physics.setGravity(0, 32)
-physics.setDrawMode( "hybrid" ) -- If you want to see the physics bodies in the game, uncomment this line. This will help show you where the boundaries for each object are.
+-- physics.setDrawMode( "hybrid" ) -- If you want to see the physics bodies in the game, uncomment this line. This will help show you where the boundaries for each object are.
 
 local tiled=require("com.ponywolf.ponytiled")
 local dragable=require("com.ponywolf.plugins.dragable")
@@ -64,7 +64,7 @@ local function enterFrame( event )
     if (hero.x<display.viewableContentWidth/2) then
       map.x=0
     end
-    
+
     -- print(map.x.." "..map.y)
 		-- Easy parallax
 		if parallax then
