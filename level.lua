@@ -56,13 +56,14 @@ local function enterFrame( event )
 	local elapsed = event.time
 
 	-- Easy way to scroll a map based on a character
-	if hero and hero.x and hero.y and not hero.isDead then
+	if hero and hero.x and hero.y  then
 		local x, y = hero:localToContent( 0, 0 )
 		x, y = display.contentCenterX - x, display.contentCenterY - y+display.contentHeight/4
 		map.x, map.y = map.x + x, map.y + y
-    if (map.x<display.viewableContentWidth/2) then
-      map.x=0
-        end
+    print(x.." "..y)
+    -- if (hero.x<display.viewableContentWidth/2) then
+    --   map.x=0
+    --     end
     -- print(map.x.." "..map.y)
 		-- Easy parallax
 		if parallax then
@@ -83,6 +84,8 @@ function scene:create( event )
     map.y=-map.designedHeight+display.viewableContentHeight
     hero=map:findObject("toad")
     hero.isDead=false
+    map.extensions="resources."
+    map:extend("toad")
     parallax=map:findLayer("Clouds")
 end
 
@@ -95,7 +98,7 @@ function scene:show( event )
 
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
-        -- Runtime:addEventListener("enterFrame",enterFrame)
+        Runtime:addEventListener("enterFrame",enterFrame)
     elseif ( phase == "did" ) then
         -- Code here runs when the scene is entirely on screen
 

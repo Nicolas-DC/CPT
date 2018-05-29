@@ -2,7 +2,7 @@
 -- Module/class for platfomer hero
 
 -- Use this as a template to build an in-game hero
-local fx = require( "com.ponywolf.ponyfx" )
+-- local fx = require( "com.ponywolf.ponyfx" )
 local composer = require( "composer" )
 
 -- Define module
@@ -11,7 +11,7 @@ local M = {}
 function M.new( instance, options )
 	-- Get the current scene
 	local scene = composer.getScene( composer.getSceneName( "current" ) )
-	local sounds = scene.sounds
+
 
 	-- Default options for instance
 	options = options or {}
@@ -22,25 +22,26 @@ function M.new( instance, options )
 	local x, y = instance.x, instance.y
 
 	-- Load spritesheet
-	local sheetData = { width = 192, height = 256, numFrames = 79, sheetContentWidth = 1920, sheetContentHeight = 2048 }
-	local sheet = graphics.newImageSheet( "scene/game/img/sprites.png", sheetData )
-	local sequenceData = {
-		{ name = "idle", frames = { 1 } },
-		{ name = "walk", frames = { 2, 3, 4, 5 }, time = 333, loopCount = 0 },
-		{ name = "jump", frames = { 6 } },
-		{ name = "ouch", frames = { 7 } },
-	}
-	instance = display.newSprite( parent, sheet, sequenceData )
+	-- local sheetData = { width = 192, height = 256, numFrames = 79, sheetContentWidth = 1920, sheetContentHeight = 2048 }
+	-- local sheet = graphics.newImageSheet( "scene/game/img/sprites.png", sheetData )
+	-- local sequenceData = {
+	-- 	{ name = "idle", frames = { 1 } },
+	-- 	{ name = "walk", frames = { 2, 3, 4, 5 }, time = 333, loopCount = 0 },
+	-- 	{ name = "jump", frames = { 6 } },
+	-- 	{ name = "ouch", frames = { 7 } },
+	-- }
+	-- instance = display.newSprite( parent, sheet, sequenceData )
+	instance=display.newImage( parent, "resources/toad.png")
 	instance.x,instance.y = x, y
-	instance:setSequence( "idle" )
+	-- instance:setSequence( "idle" )
 
 	-- Add physics
-	physics.addBody( instance, "dynamic", { radius = 54, density = 3, bounce = 0, friction =  1.0 } )
+	physics.addBody( instance, "dynamic", { radius = 18, density = 3, bounce = 0, friction =  1.0 } )
 	instance.isFixedRotation = true
 	instance.anchorY = 0.77
 
 	-- Keyboard control
-	local max, acceleration, left, right, flip = 375, 5000, 0, 0, 0
+	local max, acceleration, left, right, flip = 375, 300, 0, 0, 0
 	local lastEvent = {}
 	local function key( event )
 		local phase = event.phase
@@ -58,14 +59,14 @@ function M.new( instance, options )
 				instance:jump()
 			end
 			if not ( left == 0 and right == 0 ) and not instance.jumping then
-				instance:setSequence( "walk" )
-				instance:play()
+				-- instance:setSequence( "walk" )
+				-- instance:play()
 			end
 		elseif phase == "up" then
 			if "left" == name or "a" == name then left = 0 end
 			if "right" == name or "d" == name then right = 0 end
 			if left == 0 and right == 0 and not instance.jumping then
-				instance:setSequence("idle")
+				-- instance:setSequence("idle")
 			end
 		end
 		lastEvent = event
@@ -73,8 +74,8 @@ function M.new( instance, options )
 
 	function instance:jump()
 		if not self.jumping then
-			self:applyLinearImpulse( 0, -1050 )
-			instance:setSequence( "jump" )
+			self:applyLinearImpulse( 0, -75 )
+			-- instance:setSequence( "jump" )
 			self.jumping = true
 		end
 	end
@@ -117,27 +118,15 @@ function M.new( instance, options )
 				-- Landed after jumping
 				self.jumping = false
 				if not ( left == 0 and right == 0 ) and not instance.jumping then
-					instance:setSequence( "walk" )
-					instance:play()
+					-- instance:setSequence( "walk" )
+					-- instance:play()
 				else
-					self:setSequence( "idle" )
+					-- self:setSequence( "idle" )
 				end
 			end
 		end
 	end
 
-	function instance:preCollision( event )
-		local other = event.other
-		local y1, y2 = self.y + 50, other.y - other.height/2
-		if event.contact and ( y1 > y2 ) then
-			-- Don't bump into one way platforms
-			if other.floating then
-				event.contact.isEnabled = false
-			else
-				event.contact.friction = 0.1
-			end
-		end
-	end
 
 	local function enterFrame()
 		-- Do this every frame
@@ -153,7 +142,6 @@ function M.new( instance, options )
 
 	function instance:finalize()
 		-- On remove, cleanup instance, or call directly for non-visual
-		instance:removeEventListener( "preCollision" )
 		instance:removeEventListener( "collision" )
 		Runtime:removeEventListener( "enterFrame", enterFrame )
 		Runtime:removeEventListener( "key", key )
@@ -169,12 +157,12 @@ function M.new( instance, options )
 	Runtime:addEventListener( "key", key )
 
 	-- Add our collision listeners
-	instance:addEventListener( "preCollision" )
+
 	instance:addEventListener( "collision" )
 
 	-- Return instance
-	instance.name = "hero"
-	instance.type = "hero"
+	instance.name = "toad"
+	instance.type = "toad"
 	return instance
 end
 

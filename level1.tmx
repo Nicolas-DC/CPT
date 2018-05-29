@@ -247,7 +247,7 @@
     <property name="friction" type="float" value="1"/>
    </properties>
   </object>
-  <object id="51" type="border" x="-7" y="-40" width="21" height="526">
+  <object id="51" type="ground" x="-7" y="-40" width="21" height="526">
    <properties>
     <property name="alpha" type="int" value="0"/>
     <property name="bodyType" value="static"/>
@@ -371,11 +371,7 @@
   <object id="38" gid="17" x="1136" y="388" width="80" height="80"/>
  </objectgroup>
  <objectgroup name="Character">
-  <object id="37" name="toad" type="toad" gid="44" x="451.167" y="383.167" width="24" height="33">
-   <properties>
-    <property name="bodyType" value="dynamic"/>
-   </properties>
-  </object>
+  <object id="37" name="toad" type="toad" gid="44" x="58.167" y="379.167" width="24" height="33"/>
  </objectgroup>
  <objectgroup name="GroundDecorations">
   <object id="6" gid="16" x="0" y="384" width="32" height="16"/>
@@ -389,7 +385,7 @@
   <object id="47" gid="8" x="832" y="384" width="48" height="16"/>
   <object id="48" gid="8" x="864" y="384" width="48" height="16"/>
  </objectgroup>
- <objectgroup name="Pipes">
+ <objectgroup name="Pipes" locked="1">
   <object id="31" type="ground" gid="18" x="304" y="384" width="32" height="32"/>
   <object id="32" gid="18" x="382" y="352" width="32" height="32"/>
   <object id="33" gid="19" x="384" y="384" width="28" height="16"/>

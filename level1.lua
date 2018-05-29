@@ -577,7 +577,7 @@ return {
         {
           id = 51,
           name = "",
-          type = "border",
+          type = "ground",
           shape = "rectangle",
           x = -7,
           y = -40,
@@ -1078,16 +1078,14 @@ return {
           name = "toad",
           type = "toad",
           shape = "rectangle",
-          x = 451.167,
-          y = 383.167,
+          x = 58.167,
+          y = 379.167,
           width = 24,
           height = 33,
           rotation = 0,
           gid = 44,
           visible = true,
-          properties = {
-            ["bodyType"] = "dynamic"
-          }
+          properties = {}
         }
       }
     },
