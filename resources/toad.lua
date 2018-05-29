@@ -33,6 +33,7 @@ function M.new( instance, options )
 	-- instance = display.newSprite( parent, sheet, sequenceData )
 	instance=display.newImage( parent, "resources/toad.png")
 	instance.x,instance.y = x, y
+
 	-- instance:setSequence( "idle" )
 
 	-- Add physics
@@ -74,7 +75,7 @@ function M.new( instance, options )
 
 	function instance:jump()
 		if not self.jumping then
-			self:applyLinearImpulse( 0, -75 )
+			self:applyLinearImpulse( 0, -50 )
 			-- instance:setSequence( "jump" )
 			self.jumping = true
 		end

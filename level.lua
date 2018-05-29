@@ -61,9 +61,10 @@ local function enterFrame( event )
 		x, y = display.contentCenterX - x, display.contentCenterY - y+display.contentHeight/4
 		map.x, map.y = map.x + x, map.y + y
     print(x.." "..y)
-    -- if (hero.x<display.viewableContentWidth/2) then
-    --   map.x=0
-    --     end
+    if (hero.x<display.viewableContentWidth/2) then
+      map.x=0
+    end
+    
     -- print(map.x.." "..map.y)
 		-- Easy parallax
 		if parallax then
@@ -82,10 +83,11 @@ function scene:create( event )
     print(display.viewableContentHeight)
     map.x=0
     map.y=-map.designedHeight+display.viewableContentHeight
-    hero=map:findObject("toad")
-    hero.isDead=false
     map.extensions="resources."
     map:extend("toad")
+    hero=map:findObject("toad")
+    hero.isDead=false
+
     parallax=map:findLayer("Clouds")
 end
 
