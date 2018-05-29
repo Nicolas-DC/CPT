@@ -22,24 +22,27 @@ function M.new( instance, options )
 	local x, y = instance.x, instance.y
 
 	-- Load spritesheet
-	-- local sheetData = { width = 192, height = 256, numFrames = 79, sheetContentWidth = 1920, sheetContentHeight = 2048 }
-	-- local sheet = graphics.newImageSheet( "scene/game/img/sprites.png", sheetData )
-	-- local sequenceData = {
-	-- 	{ name = "idle", frames = { 1 } },
-	-- 	{ name = "walk", frames = { 2, 3, 4, 5 }, time = 333, loopCount = 0 },
-	-- 	{ name = "jump", frames = { 6 } },
-	-- 	{ name = "ouch", frames = { 7 } },
-	-- }
-	-- instance = display.newSprite( parent, sheet, sequenceData )
-	instance=display.newImage( parent, "resources/toad.png")
+	local sheetData = {
+		frames=require("resources.toadFrames").frames,
+	}
+	local sheet = graphics.newImageSheet( "resources/toadsSheet.png", sheetData )
+	local sequenceData = {
+		{ name = "idle", frames = { 1, 2 }, time=750, loopCount=0 },
+		{ name = "walk", frames = { 3, 4, 5, 6, 7 }, time = 500, loopCount = 0 },
+		-- { name = "jump", frames = { 6 } },
+		-- { name = "ouch", frames = { 7 } },
+	}
+	instance = display.newSprite( parent, sheet, sequenceData )
+	-- instance=display.newImage( parent, "resources/toad.png")
 	instance.x,instance.y = x, y
 
-	-- instance:setSequence( "idle" )
+	instance:setSequence( "idle" )
+	instance:play()
 
 	-- Add physics
-	physics.addBody( instance, "dynamic", { radius = 18, density = 3, bounce = 0, friction =  1.0 } )
+	physics.addBody( instance, "dynamic", { radius = 12, density = 3, bounce = 0, friction =  1.0 } )
 	instance.isFixedRotation = true
-	instance.anchorY = 0.77
+	instance.anchorY = 0.5
 
 	-- Keyboard control
 	local max, acceleration, left, right, flip = 375, 300, 0, 0, 0
@@ -60,14 +63,15 @@ function M.new( instance, options )
 				instance:jump()
 			end
 			if not ( left == 0 and right == 0 ) and not instance.jumping then
-				-- instance:setSequence( "walk" )
-				-- instance:play()
+				instance:setSequence( "walk" )
+				instance:play()
 			end
 		elseif phase == "up" then
 			if "left" == name or "a" == name then left = 0 end
 			if "right" == name or "d" == name then right = 0 end
 			if left == 0 and right == 0 and not instance.jumping then
-				-- instance:setSequence("idle")
+				instance:setSequence("idle")
+				instance:play()
 			end
 		end
 		lastEvent = event
