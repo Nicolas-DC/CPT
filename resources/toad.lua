@@ -45,7 +45,7 @@ function M.new( instance, options )
 	instance.anchorY = 0.5
 
 	-- Keyboard control
-	local max, acceleration, left, right, flip = 375, 300, 0, 0, 0
+	local max, acceleration, left, right, flip = 175, 100, 0, 0, 0
 	local lastEvent = {}
 	local function key( event )
 		local phase = event.phase
@@ -79,7 +79,7 @@ function M.new( instance, options )
 
 	function instance:jump()
 		if not self.jumping then
-			self:applyLinearImpulse( 0, -50 )
+			self:applyLinearImpulse( 0, -17 )
 			-- instance:setSequence( "jump" )
 			self.jumping = true
 		end

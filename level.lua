@@ -5,6 +5,7 @@ local scene = composer.newScene()
 local physics = require( "physics" )
 physics.start()
 physics.setGravity(0, 32)
+physics.setDrawMode( "hybrid" )
 -- physics.setDrawMode( "hybrid" ) -- If you want to see the physics bodies in the game, uncomment this line. This will help show you where the boundaries for each object are.
 
 local tiled=require("com.ponywolf.ponytiled")
@@ -60,7 +61,7 @@ local function enterFrame( event )
 		local x, y = hero:localToContent( 0, 0 )
 		x, y = display.contentCenterX - x, display.contentCenterY - y+display.contentHeight/4
 		map.x, map.y = map.x + x, map.y + y
-    print(x.." "..y)
+    -- print(x.." "..y)
     if (hero.x<display.viewableContentWidth/2) then
       map.x=0
     end
@@ -77,14 +78,14 @@ function scene:create( event )
 
     local sceneGroup = self.view
     -- Code here runs when the scene is first created but has not yet appeared on screen
-    data=require("level1")
+    data=require("level2")
     map=tiled.new(data )
     map=dragable.new(map)
     print(display.viewableContentHeight)
     map.x=0
     map.y=-map.designedHeight+display.viewableContentHeight
     map.extensions="resources."
-    map:extend("toad")
+    map:extend("toad", "coin")
     hero=map:findObject("toad")
     hero.isDead=false
 
