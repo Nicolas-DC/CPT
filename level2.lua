@@ -8,7 +8,7 @@ return {
   height = 20,
   tilewidth = 16,
   tileheight = 16,
-  nextobjectid = 80,
+  nextobjectid = 84,
   properties = {},
   tilesets = {
     {
@@ -3020,7 +3020,7 @@ return {
         {
           id = 74,
           name = "",
-          type = "",
+          type = "exit",
           shape = "rectangle",
           x = -1.33333,
           y = -15.3333,
@@ -3032,19 +3032,6 @@ return {
             ["alpha"] = 0,
             ["bodyType"] = "static"
           }
-        },
-        {
-          id = 75,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = -74.6667,
-          y = -102,
-          width = 0,
-          height = 0,
-          rotation = 0,
-          visible = true,
-          properties = {}
         },
         {
           id = 76,
@@ -3129,7 +3116,7 @@ return {
         {
           id = 9,
           name = "",
-          type = "ground",
+          type = "exit",
           shape = "rectangle",
           x = 720,
           y = 224,
@@ -3143,7 +3130,7 @@ return {
         {
           id = 10,
           name = "",
-          type = "ground",
+          type = "exit",
           shape = "rectangle",
           x = 640,
           y = 224,
@@ -3157,7 +3144,7 @@ return {
         {
           id = 11,
           name = "",
-          type = "ground",
+          type = "exit",
           shape = "rectangle",
           x = 560,
           y = 224,
@@ -3195,7 +3182,50 @@ return {
       properties = {
         ["bodyType"] = "dynamic"
       },
-      objects = {}
+      objects = {
+        {
+          id = 80,
+          name = "",
+          type = "blob",
+          shape = "rectangle",
+          x = 422,
+          y = 194,
+          width = 14,
+          height = 23,
+          rotation = 0,
+          gid = 168,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 82,
+          name = "",
+          type = "blob",
+          shape = "rectangle",
+          x = 358.667,
+          y = 197.333,
+          width = 14,
+          height = 23,
+          rotation = 0,
+          gid = 168,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 83,
+          name = "",
+          type = "blob",
+          shape = "rectangle",
+          x = 511.333,
+          y = 202.667,
+          width = 14,
+          height = 23,
+          rotation = 0,
+          gid = 168,
+          visible = true,
+          properties = {}
+        }
+      }
     }
   }
 }

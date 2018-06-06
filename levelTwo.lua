@@ -78,7 +78,7 @@ function scene:create( event )
 
     local sceneGroup = self.view
     -- Code here runs when the scene is first created but has not yet appeared on screen
-    data=require("level2")
+    data=require("level1")
     map=tiled.new(data )
     map=dragable.new(map)
     print(display.viewableContentHeight)
