@@ -117,7 +117,7 @@ function M.new( instance, options )
 					other:die()
 				elseif not other.isDead then
 					-- They attacked us
-				--	self:hurt()
+					self:hurt()
 				end
 			elseif self.jumping and vy > 0 and not self.isDead then
 				-- Landed after jumping
