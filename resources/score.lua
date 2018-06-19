@@ -10,7 +10,7 @@ function M.new( options )
 	options = options or {}
 	local label = options.label or ""
 	local x, y = options.x or 0, options.y or 0
-	local font = options.font or "scene/game/font/GermaniaOne-Regular.ttf"
+	local font = options.font or "resources/GermaniaOne-Regular.ttf"
 	local size = options.size or 56
 	local align = options.align or "right"
 	local stroked = options.stroked or true
