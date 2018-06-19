@@ -4,7 +4,7 @@
 -- Use this as a template to build an in-game hero
 -- local fx = require( "com.ponywolf.ponyfx" )
 local composer = require( "composer" )
-
+local fx=require("com.ponywolf.ponyfx")
 -- Define module
 local M = {}
 
@@ -45,7 +45,7 @@ function M.new( instance, options )
 	instance.anchorY = 0.5
 
 	-- Keyboard control
-	local max, acceleration, left, right, flip = 175, 100, 0, 0, 0
+	local max, acceleration, left, right, flip = 500, 150, 0, 0, 0
 	local lastEvent = {}
 	local function key( event )
 		local phase = event.phase
@@ -85,39 +85,45 @@ function M.new( instance, options )
 		end
 	end
 
-	-- function instance:hurt()
-	-- 	fx.flash( self )
-	-- 	audio.play( sounds.hurt[math.random(2)] )
-	-- 	if self.shield:damage() <= 0 then
-	-- 		-- We died
-	-- 		fx.fadeOut( function()
-	-- 			composer.gotoScene( "scene.refresh", { params = { map = self.filename } } )
-	-- 		end, 1500, 1000 )
-	-- 		instance.isDead = true
-	-- 		instance.isSensor = true
-	-- 		self:applyLinearImpulse( 0, -500 )
-	-- 		-- Death animation
-	-- 		instance:setSequence( "ouch" )
-	-- 		self.xScale = 1
-	-- 		transition.to( self, { xScale = -1, time = 750, transition = easing.continuousLoop, iterations = -1 } )
-	-- 		-- Remove all listeners
-	-- 		self:finalize()
-	-- 	end
-	-- end
+	  --function instance:hurt()
+	  --	fx.flash( self )
+	 	--audio.play( sounds.hurt[math.random(2)] )
+	  	--if self.shield:damage() <= 0 then
+	  		-- We died
+	  	--	fx.fadeOut( function()
+	  	--		composer.gotoScene( "scene.refresh", { params = { map = self.filename } } )
+	  	--	end, 1500, 1000 )
+	  	--	instance.isDead = true
+	  --		instance.isSensor = true
+	  --		self:applyLinearImpulse( 0, -500 )
+	  --		-- Death animation
+	  --		instance:setSequence( "ouch" )
+	  --		self.xScale = 1
+	  --		transition.to( self, { xScale = -1, time = 750, transition = easing.continuousLoop, iterations = -1 } )
+	  		-- Remove all listeners
+	  --		self:finalize()
+	  --	end
+	--  end
 
 	function instance:collision( event )
 		local phase = event.phase
 		local other = event.other
-		local y1, y2 = self.y + 50, other.y - ( other.type == "enemy" and 25 or other.height/2 )
+		local y1, y2 = self.y + self.height/2, other.y - ( other.type == "enemy" and 25 or other.height/2 )
 		local vx, vy = self:getLinearVelocity()
 		if phase == "began" then
 			if not self.isDead and ( other.type == "blob" or other.type == "enemy" ) then
 				if y1 < y2 then
 					-- Hopped on top of an enemy
-					other:die()
-				elseif not other.isDead then
+				 	display.remove( other )     --other:die()
+				 elseif not other.isDead then
+				 	fx.fadeOut( function()
+			   			composer.gotoScene( "resources.refresh", { params = { map = self.filename } } )
+			   		end, 1500, 1000 )
+						transition.to( self, { xScale = -1, time = 750, transition = easing.continuousLoop, iterations = -1 } )
 					-- They attacked us
-					self:hurt()
+					onComplete = function() display.remove( self )
+					end
+					 self:hurt()
 				end
 			elseif self.jumping and vy > 0 and not self.isDead then
 				-- Landed after jumping

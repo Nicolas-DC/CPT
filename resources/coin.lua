@@ -17,6 +17,7 @@ function M.new( instance )
 
 		local phase, other = event.phase, event.other
 		if phase == "began" and other.type == "toad" then
+			scene.score:add(10000)
 			display.remove( self )
 		end
 	end

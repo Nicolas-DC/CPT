@@ -10,4 +10,4 @@ display.setStatusBar( display.HiddenStatusBar )
 
 -- Go to the menu scene
 local composer = require( "composer" )
-composer.gotoScene("level")
+composer.gotoScene("level", {params = { } } )

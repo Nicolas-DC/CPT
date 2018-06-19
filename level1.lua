@@ -8,7 +8,7 @@ return {
   height = 30,
   tilewidth = 16,
   tileheight = 16,
-  nextobjectid = 79,
+  nextobjectid = 82,
   properties = {},
   tilesets = {
     {
@@ -3214,7 +3214,7 @@ return {
           properties = {
             ["alpha"] = 0,
             ["bodyType"] = "static",
-            ["friction"] = 0
+            ["friction"] = 1
           }
         },
         {
@@ -3367,7 +3367,7 @@ return {
         {
           id = 38,
           name = "",
-          type = "",
+          type = "exit",
           shape = "rectangle",
           x = 1136,
           y = 388,
@@ -3376,7 +3376,9 @@ return {
           rotation = 0,
           gid = 17,
           visible = true,
-          properties = {}
+          properties = {
+            ["map"] = "level2"
+          }
         }
       }
     },
@@ -3689,6 +3691,32 @@ return {
           height = 14,
           rotation = 0,
           gid = 107,
+          visible = true,
+          properties = {}
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      name = "Enemy",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      draworder = "topdown",
+      properties = {},
+      objects = {
+        {
+          id = 79,
+          name = "blob",
+          type = "blob",
+          shape = "rectangle",
+          x = 848,
+          y = 384,
+          width = 16,
+          height = 24,
+          rotation = 0,
+          gid = 167,
           visible = true,
           properties = {}
         }

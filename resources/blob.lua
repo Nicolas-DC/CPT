@@ -42,7 +42,7 @@ function M.new( instance )
 		end
 	end
 
-	local max, direction, flip, timeout, idle = 200, 750, -0.133, 0, 0
+	local max, direction, flip, timeout, idle = 200, 75, -0.133, 0, 0
 	direction = direction * ( ( instance.xScale < 0 ) and 1 or -1 )
 	flip = flip * ( ( instance.xScale < 0 ) and 1 or -1 )
 

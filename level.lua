@@ -6,7 +6,7 @@ local physics = require( "physics" )
 physics.start()
 physics.setGravity(0, 32)
 
-physics.setDrawMode( "hybrid" ) -- If you want to see the physics bodies in the game, uncomment this line. This will help show you where the boundaries for each object are.
+--physics.setDrawMode( "hybrid" ) -- If you want to see the physics bodies in the game, uncomment this line. This will help show you where the boundaries for each object are.
 
 local tiled=require("com.ponywolf.ponytiled")
 local dragable=require("com.ponywolf.plugins.dragable")
@@ -23,6 +23,7 @@ local top = display.screenOriginY
 local left = display.screenOriginX
 local right = display.viewableContentWidth - left
 local bottom = display.viewableContentHeight - display.screenOriginY
+local scoring = require( "resources.score" )
 
 -- The next lines are forward declares
 local createEnemyShips, timerForEnemies -- forward declares for function and timer
@@ -78,8 +79,10 @@ function scene:create( event )
 
     local sceneGroup = self.view
     -- Code here runs when the scene is first created but has not yet appeared on screen
-    data=require("level2")
-    map=tiled.new(data )
+    -- data=require("level2")
+    local filename = event.params.map or "level2"
+    local mapData = require(filename)
+    map=tiled.new(mapData)
     map=dragable.new(map)
     print(display.viewableContentHeight)
     map.x=0
@@ -90,6 +93,12 @@ function scene:create( event )
     hero.isDead=false
 
     parallax=map:findLayer("Clouds")
+    scene.score = scoring.new( {score=event.params.score} )
+    local score = scene.score
+    score.x=display.contentWidth - score.contentWidth / 2-32
+    score.y=display.screenOriginY + score.contentHeight / 2+16
+    sceneGroup:insert(map)
+    sceneGroup:insert(score)
 end
 
 
